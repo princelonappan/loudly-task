@@ -26,11 +26,11 @@ This application provides the following features.
 
 First, clone the repo:
 ```bash
-$ git clone https://github.com/princelonappan/internations-coding-challenge.git
+$ git clone https://github.com/princelonappan/loudly-task.git
 ```
 #### Install dependencies
 ```
-$ cd internations-coding-challenge
+$ cd loudly-task
 $ composer install
 ```
 ```
@@ -40,20 +40,27 @@ $ change the database configuration in the .env file
 ```
 $ php bin/console make:migration
 $ php bin/console doctrine:migrations:migrate
-```
-#### Add the following sql to the database for adding admin user.
-admin@admin.com/admin
-```
-$ INSERT INTO `admin` (`id`, `email`, `roles`, `password`) VALUES
-(1, 'admin@admin.com', '[\"ROLE_ADMIN\"]', '$2y$13$SdAsUDtP1TzaG.B8T1ILYuNKEU2bL0jqN19LCQMccHUwaxBMofM9C');
+$ copy the database with '_test' name and create for testing purpose
 ```
 
-### URL Routes
+### Run the application
 ```
-$ {{ base_url}}/admin - Admin URL
+$ symfony server:start
+```
+#### How to use
+```
+$ Create the users with 'api/users' API.
+$ Use the 'api/users' GET API to see all the users.
+$ Use the user ids to send the Invitation.
 ```
 
 #### Run API Swagger
 
 You can access the Swagger API through the following end point. <br />
-```/api```
+```{{ base_url}}/api/doc```
+
+#### Run Test
+
+```
+$ php bin/phpunit
+```

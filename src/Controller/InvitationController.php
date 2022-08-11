@@ -82,9 +82,16 @@ class InvitationController extends AbstractController
         {
             $fromUser = $this->userRepository->find($parameters['from']);
             $toUser = $this->userRepository->find($parameters['to']);
-            $invitationDetails =  $invitationService->saveInvitation($fromUser, $toUser, $parameters);
-            $response = array('invitation_id' => $invitationDetails->getId(), 'token' => $invitationDetails->getToken());
-            return $this->json('Successfully sent the invitation to the user. '.json_encode($response));
+            if(!empty($fromUser) && !empty($toUser))
+            {
+                $invitationDetails =  $invitationService->saveInvitation($fromUser, $toUser, $parameters);
+                $response = array('invitation_id' => $invitationDetails->getId(), 'token' => $invitationDetails->getToken());
+                return $this->json('Successfully sent the invitation to the user. '.json_encode($response));
+            }
+            else
+            {
+                return $this->json('User(s) not found.');
+            }
         }
         else
         {
